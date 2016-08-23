@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link href="assets/css/reset.css" rel="stylesheet"/>
+	<link href="assets/css/style.css" rel="stylesheet"/>
+	<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/js/jQuery-1.js"></script>
+</head>
+<body>
+	<div id="login">
+		<h1>Login</h1>
+		<form  id="login-form" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>" novalidate>
+		<div>
+			<label for="name">Full Name</label>
+			<input type="text" id="name" name="name"/>
+		</div>
+		<div>
+			<label for="password">Password</label>
+			<input type="password" id="password" name="pass"/>
+		</div>
+		<div><button type="submit" id="submit">Login</button></div>
+		</form>
+	</div>
+	
+	<div id="purchases">
+		<h1>Purchases</h1>
+		<button id="add">+</button>
+		<table>
+			<thead>
+				<tr>
+					<th>No</th>
+					<th>Name</th>
+					<th>Quantity</th>
+					<th>Price</th>
+					<th><span>Minus4e</span></th>
+					<th><span>Moliv4e</span></th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>
+	</div>
+	
+	<div id="edit">
+		<h1>Add purchase</h1>
+		<form action="#" method="POST">
+		<div><label for="p-name">Name</label>
+		<input type="text" id="p-name" name="p-name"/>
+		</div>
+		<div><label for="p-quantity">Quantity</label>
+		<input type="number" id="p-quantity" name="p-quantity"/>
+		</div>
+		<div><label for="p-price">Price</label>
+		<input type="number" id="p-price" name="p-price"/>
+		</div>
+		<div><button id="edit-submit" type="submit">OK</button></div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Quotes Application</title>
+
+<link type="text/css" rel="stylesheet"
+	href="node_modules/font-awesome/css/font-awesome.min.css"></link>
+<link type="text/css" rel="stylesheet" href="assets/css/reset.css"></link>
+<link type="text/css" rel="stylesheet" href="assets/css/style.css"></link>
+<script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
+<script src="assets/js/ValidationForm.js" type="text/javascript"></script>
+<script src="assets/js/PanelManager.js" type="text/javascript"></script>
+<script src="assets/js/HeaderPanel.js" type="text/javascript"></script>
+<script src="assets/js/SignPanel.js" type="text/javascript"></script>
+<script src="assets/js/LoginPanel.js" type="text/javascript"></script>
+<script src="assets/js/EditPanel.js" type="text/javascript"></script>
+<script src="assets/js/ListPanel.js" type="text/javascript"></script>
+<script src="assets/js/my-jquery.js" type="text/javascript"></script>
+</head>
+<body>
+	<div id="wrapper">
+		<header id="header"> 
+			<h2>My admin site for Quoties</h2>
+			<ul>
+				
+				<li><a type="submit" href="login-panel" class="log">Log In</a></li>
+				
+				<li><a href="signin-panel" class="sign">Sign Up</a></li>
+			</ul>
+		</header>
+		
+		<div id="header-panel">
+			<h1>Quote of the Day</h1>
+			<p id="header-quote">The true sign of intelligence is not knowledge but imagination. </p>
+			<p id="header-author">Albert Einstein</p>
+			<div class="button">
+					<button type="button" class="btn"><a href="http://localhost/MAIN_PROJECT/main/Index_demo.html" id="demo">DEMO</a></button>
+					<button type="button" class="btn log" >LOG IN</button>
+			</div>
+		</div>
+		
+		<div id="login-panel">
+			<h1>Log In</h1>
+			<form id="login-form" method="POST" action="server/login.php" novalidate>
+				<div>
+					<label for="username">Username</label> 
+					<input type="text" id="username" name="username" />
+					<p class="error-user"></p>
+				</div>
+				<div>
+					<label for="password">Password</label> 
+					<input type="password" id="password" name="password" />
+					<p class="error-pass"></p>
+				</div>
+				<p><a href="#signin-panel" class="sign">*Create new Account</a></p>
+				<div>
+					<button type="submit" id="login-btn">Log In</button>
+				</div>
+			</form>
+		</div>
+		<div id="signin-panel">
+			<h1>Sign Up</h1>
+			<form id="sign-form" method="POST"
+				action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>"
+				novalidate>
+				<div>
+					<label for="s-username">Username</label> 
+					<input type="text" id="s-username" name="s-username"/>
+					<p class="error-user"></p>
+				</div>
+				<div>
+					<label for="s-password">Password</label> 
+					<input type="password"	id="s-password" name="s-pass" />
+					<p class="error-pass"></p>
+				</div>
+				<div>
+					<label for="r-password">Repeat Password</label> <input
+						type="password" id="r-password" name="r-pass" />
+						<p class="error-r-pass"></p>
+				</div>
+					<div>
+					<label for="s-email">Email</label> <input type="email"
+						id="s-email" name="s-email" />
+						<p class="error-email"></p>
+				</div>
+				<div>
+					<button type="submit" id="sign-btn">Sign Up</button>
+				</div>
+			</form>
+		</div>
+
+		<div id="list-panel">
+			<h1>Quotes</h1>
+			<!-- <form action="search.php" method="get">
+				<a href="#"><i class="fa fa-search" aria-hidden="true"></i></a>
+				<input type="text"  maxlength="80" title="search" id="search" value="Search..." >
+			</form> -->
+			<a href="javascript:void(0);" id="add-new">+</a>
+			<table id="list-table">
+				<thead>
+					<tr>
+						<th>No</th>
+						<th><a id="category-sort" href="#">Category</a></th>
+						<th><a id="author-sort" href="#">Author</a></th>
+						<th>Quote</th>
+						<th>Active</th>
+						<th><span>Edit</span></th>
+						<th><span>Delete</span></th>
+					</tr>
+				</thead>
+				<tbody>
+				</tbody>
+			</table>
+		</div>
+
+		<div id="edit-panel">
+			<h1>Add quote</h1>
+			<form action="#" method="POST">
+				<div>
+					<label for="category">Category</label> 
+					<select name="category" id="category">
+						<option value="motivation" selected>Motivational Quotes</option>
+						<option value="success">Success Quotes</option>
+						<option value="life">Life Quotes</option>
+						<option value="friendship">Friendship Quotes</option>
+						<option value="love">Love Quotes</option>
+						<option value="design">Design Quotes</option>
+						<option value="education">Education Quotes</option>
+						<option value="funny">Funny Quotes</option>
+					</select>
+				</div>
+				<div>
+					<label for="author">Author</label>
+					<input type="text" id="author" name="author"/>
+				</div>
+				<div>
+					<label for="quote">Quote</label>
+					<textarea name="quote" id="quote" rows="5" cols="30">Enter Quote</textarea>
+				</div>
+				<div>
+					<input type="checkbox" id="active" name="active" checked/> <label for="active" >Active</label>
+				</div>
+				<div>
+					<button id="save-btn" type="submit">ADD</button>
+					<button id="return-btn" type="submit">Quotes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer> </footer>
+</body>
+</html>

@@ -13,14 +13,14 @@ $(document).ready(function () {
 	var result = getRandNumbers();
 	var quotes = [];
 var urlGET = "server/getForDemo.php?id1="+result[0]+"&id2="+result[1]+"&id3="+result[2];
-var urlPost = "server/getForDemo.php";
+/*var urlPost = "server/getForDemo.php";
 var data = {
 		id1: result[0],
 		id2: result[1],
 		id3: result[2]
-}
+}*/
 
-$.ajax({
+/*$.ajax({
 	contentType: "application/json",
 	method: "POST",
 	dataType: "json",
@@ -32,11 +32,11 @@ $.ajax({
         if (response == 'success') {
         	var a = json.parse(response);
         	console.log(a);
-            /*window.location.replace("../Project/compose.html");
-            $(".inner-container").css("height", "400px");*/
+            window.location.replace("../Project/compose.html");
+            $(".inner-container").css("height", "400px");
         }
     }
-})/*.then(function(data){
+}).then(function(data){
 	quotes.push(data);
 	
 	alert(quotes[1].author);
@@ -54,11 +54,12 @@ $.ajax({
 		alert("error");
 	}
 })*/
-/*
-	$.get(url).then(function(data){
+
+	$.get(urlGET).then(function(data){
 	alert(data);
 		if(data !== "") {
-			return data;
+			var a = json.parse(data);
+			console.log(a);
 			var html = '';
 			for(var i in data) {
 				html += "<dd>"+data[i].quote+"</dd>"+
@@ -69,5 +70,5 @@ $.ajax({
 		} else {
 			alert("not success");
 		}
-	}, "json")*/
+	}, "json")
 })

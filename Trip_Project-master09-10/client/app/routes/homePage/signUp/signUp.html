@@ -1,0 +1,35 @@
+<div class="login container">
+	<div class="row">
+ 		 <h2 class="nonactive" ng-href="#/homePage/login"> sign in </h2>
+
+  		<h2 class="active"> sign up </h2>
+ 			<form ><!-- ng-submit="addNewUser()" -->
+    			<input type="text" ng-model="newUser.name" class="text" name="username">
+    			<span>Username</span>
+    			<br>
+    
+    			<br>
+  				<input type="password" class="text" name="password" ng-model="newUser.password">
+   				<span>password</span>
+    			<br>
+    			<br>
+  				<input type="password" class="text" name="passRepeat" ng-model="newUser.passRepeat">
+   				<span>repeat password</span>
+    			<br>
+    			<br>
+  				<input type="e-mail" class="text" name="e-mail"  ng-model="newUser.email">
+   				<span>e-mail</span>
+    			<br>
+    			
+
+    			<button class="signin" type="submit" ng-click="addUserAjax()">
+     				 Sign Up
+    			</button>
+    			
+  			  <hr>
+
+    		<a ng-href="#/homePage/:id/edit">Forgot Password?</a>
+  			<a ng-href="#/homePage/login">Sign In?</a>
+  		</form>
+	</div>
+</div>

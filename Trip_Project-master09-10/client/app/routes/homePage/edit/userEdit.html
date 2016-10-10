@@ -1,0 +1,28 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
+		<h1>User Info Update</h1>
+			<div><span>User Name: </span>{{users.name}}
+			</div>
+			<div><span>User Password: </span>{{users.password}}
+			</div>
+			<div><span>User E-mail: </span>{{users.email}}
+			</div>
+			<a ng-href="#/homePage/{{userId}}/edit" ng-click="showUpdate()">Edit user</a>
+			
+			
+			<h1>User Update</h1>
+			<div><label>User Name: </label><input type="text" ng-model="users.name"/>
+			</div>
+			<div><label>User Password: </label><input type="password" ng-model="users.password"/>
+			</div>
+			<div><label>User E-mail: </label><input type="e-mail" ng-model="users.email"/>
+			</div>
+			<button ng-click="update()">Update</button>
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+</div>

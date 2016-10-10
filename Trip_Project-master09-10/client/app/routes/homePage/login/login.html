@@ -1,0 +1,33 @@
+<div class="login container">
+	<div class="row">
+ 		<h2 class="active"> sign in </h2>
+
+  		<h2 class="nonactive"> sign up </h2>
+ 		<form>
+    		<input type="text" class="text" name="username">
+    		<span>Username</span>
+    		<br>
+    
+   			<br>
+  			<input type="password" class="text" name="password">
+   			<span>password</span>
+    		<br>
+
+    		<button class="signin" ng-click="sendAjax()">
+     				 Sign In
+    		</button>
+    			
+  			  <hr>
+
+    		<a ng-href="#/homePage/:id/edit">Forgot Password?</a>
+  			<a ng-href="#/homePage/signUp">Sign Up?</a>
+  		</form>
+	</div>
+</div>
+<!-- <div ng-if="isLogged">
+        you are logged in
+    </div>
+    <div ng-if="failCount">
+        failed attempts {{failCount}}
+    </div>
+</div> -->

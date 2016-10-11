@@ -1,24 +1,35 @@
-/**
- * 
- */
-travelAssistant.controller("LoginUserController", function($scope, $rootScope, $http, userService){
-	var data =  {name: 'mmm', password: 'mmm'};
+
+travelAssistant.controller("LoginUserController", 
+		['$scope', 'userService', '$http', '$location', '$sessionStorage',
+		 function LoginUserController($scope, userService, $http, $location, $sessionStorage){
+	
 	$scope.sendAjax = function() {
+		var user = $scope.user.name;
+		var pass = $scope.user.password;
+		var data = {
+				name: user,
+				password: pass
+		};
+
 		$http({
 			url: '../server/login.php',
 			data: data,
 			method: 'POST',
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;'}
-		}).then(function successCallback(response) {
-            if (response.data.success == true) {
-                /*  failCounter = 0;*/
-                  successCb(response.data.success)
-              } else {
-                  /*failCb(++failCounter);*/'data++';
-              }
-          }, function errorCallback(response) {
-            /*  failCb(++failCounter);*/"error";
-          });
+			dataType: "json",
+			headers: {'Content-Type': 'application/json'}
+		}).then(function(data){
+			console.log(data);
+			if(data.status == 200) {
+				alert("success");
+				$sessionStorage.logged = 1;
+				$location.path('/homePage/contacts');
+				
+			} else {
+				alert("Not success");
+			}
+		})
+		
+		$scope.user={};
+		
 	}
-	
-})
+}])

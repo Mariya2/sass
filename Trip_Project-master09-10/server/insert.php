@@ -30,7 +30,7 @@ $statement = $pdo->prepare($insertPersonSql);
 $ids = [];
 foreach ($people as $item) {
 
-   $statement->execute($item);
+   $statement -> execute($item);
    $ids[] = $pdo->lastInsertId();
 }
 

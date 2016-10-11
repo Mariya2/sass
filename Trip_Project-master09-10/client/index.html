@@ -32,7 +32,7 @@
 <div class="navbar navbar-default">
     <div class="container">
         <div class="navbar-header">
-            <a href="#/homePage" class="navbar-brand">Travel Assistant</a>
+            <a ng-href="#/homePage" class="navbar-brand" id="top">Travel Assistant</a>
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -45,14 +45,14 @@
                     <a ng-href="#">Home</a>
                 </li>
                 <li>
-                 <a ng-href="#">All artists</a>
+                 <a ng-href="#" ng-hide="hidden">All artists</a>
                 </li>
                 <li>
-                    <a ng-href="#">Contacts</a>
+                    <a ng-href="#/homePage/contacts">Contacts</a>
                 </li>
-                <li><a ng-href="#/homePage/login" class="log pull-right"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
+                <li><a ng-href="#/homePage/login" class="log"><span class="glyphicon glyphicon-log-in"></span>  {{log}}</a></li>
 				
-				<li><a ng-href="#/homePage/signUp" class="sign pull-right"><span class="glyphicon glyphicon-user"></span>  Sign Up</a></li>
+				<li><a ng-href="#/homePage/signUp" class="sign"><span class="glyphicon glyphicon-user"></span>  Sign Up</a></li>
             </ul>
         </div>
     </div>
@@ -62,11 +62,18 @@
 <div ng-view></div>
 
 <footer>
-<div class="container">
-<div class="row">
-<div class="md-col-offset-2">Copyright 2016</div>
-</div>
-</div>
+	<p>Travel Assistant &#169; 2016 Privacy Policy</p>
+	<p class="bold">Questions? Call Us Toll Free: (012) 123-456-7890</p>
+	<div id="icons">
+		<a href ="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+		<a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
+		<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+		<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+		<a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+	</div>
+	<div id="contacts">
+		<a href="#top"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a> <br/>
+	</div>
 </footer>
 </body>
 </html>

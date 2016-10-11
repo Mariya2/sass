@@ -1,19 +1,23 @@
 
 
-var travelAssistant = angular.module('travelAssistant',['ngRoute'
-   /*, 'ngCookies',
+var travelAssistant = angular.module('travelAssistant',['ngRoute'                                                    
+    /*, 'ngCookies' ,
     'travelAssistent.routes.insidePage', 
     'uiGmapGoogleMapApiProvider', 
     'geolocation' */])
 
-.config(/*['$locationProvider', '$routeProvider'],*/ 
+.config(['$locationProvider', '$routeProvider', 
           function($locationProvider, $routeProvider){
 	//$locationProvider.hashPrefix('!');   ???
 	
 	$routeProvider
 	.when('/homePage', {
-		templateUrl:"./app/routes/homePage/list/userList.html",
-		controller:'UserListController'
+		templateUrl:"./app/routes/homePage/home/homePage.html",
+		controller:'HomePageController'
+	})
+	.when('/homePage/contacts', {
+		templateUrl:"./app/routes/homePage/contacts/contacts.html",
+		controller:'ContactsController'
 	})
 	.when('/homePage/login', {
 		templateUrl:"./app/routes/homePage/login/login.html",
@@ -28,9 +32,18 @@ var travelAssistant = angular.module('travelAssistant',['ngRoute'
 		controller:'EditUserController'
 	})
 	.otherwise({redirectTo: '/homePage'})
-})
-.controller('PageController', function($rootScope) {
-	console.log("PageController");
+}])
+.controller('PageController', function($rootScope, $scope) {
+	$scope.log = "Log In";
+	
+
+	/*$scope.changeState = function(){
+		$scope.hidden = !$scope.hidden;
+	}
+	if (isLogged){
+		$scope.
+	}*/
+
 })
 
 /*   .config(function(uiGmapGoogleMapApiProvider) {
@@ -397,61 +410,173 @@ console.log(directionsDisplay)
 
 	
 /**
+ * var formSection = document.getElementById("form");
+
+formSection.addEventListener('focus', function(e){
+	var target = e.target;
+	if (target.tagName.toLowerCase()== "input" 
+			|| target.tagName.toLowerCase()=="textarea") {
+		var label = target.previousElementSibling;
+		label.style.transition = "0.5s ease";
+		label.style.transform = "translate(0px, -1.8em)";
+	}
+	
+}, true);
+
+}, false);
+ */
+
+travelAssistant.controller("ContactsController",
+		['$scope', 'userService', '$http', '$location',
+		 function ContactsController($scope, userService, $http, $location){
+			$scope.user = {};
+			
+			$scope.userAjaxMessage = function() {
+				
+				var user = $scope.user.name;
+				var email = $scope.user.email;
+				var message = $scope.user.message;
+		
+					var data = {
+							name: user,
+							email: email,
+							message: message
+					}
+					$http({
+						url: '../server/getMessage.php',
+						data: data,
+						method: 'POST',
+						dataType: "json",
+						headers: {'Content-Type': 'application/json'}
+					}).then(function(data){
+						if(data.status == 200) {
+							alert("success");
+							$location.path('/homePage');
+						} else {
+							alert("Not success");
+						}
+					})
+				
+				$scope.newUser = {};
+			}
+			
+			/*label.style.transition = "0.5s ease";
+			label.style.transform = "translate(0px, -1.8em)";*/
+		
+}])
+/**
  * 
  */
-travelAssistant.controller("EditUserController", function($scope, userService, $routeParams, $location){
-	$scope.users = userService.getUserById($routeParams.id);
+travelAssistant.controller("EditUserController",
+		['$scope', 'userService', '$http',
+		 function EditUserController($scope, userService, $http){
+	/*$scope.users = userService.getUserById($routeParams.id);
 	$scope.userId = $routeParams.id;
 	$scope.update = function() {
 		userService.updateById($routeParams.id, $scope.users);
 		$location.url('/homePage/' + $routeParams.id);
-	}
-	$scope.showUpdate = function(){
-		$location.url('/homePage/' + $routeParams.id);
+	}*/
+	$scope.makeNewPass = function() {
+		/*$location.url('/homePage/' + $routeParams.id);*/
+		
+		var user = $scope.user.name;
+		var pass = $scope.user.password;
+		var passRepeat = $scope.user.passRepeat;
+		if (pass === passRepeat){
+			var data = {
+					name: user,
+					password: pass,
+			}
+		} else {
+			console.log('error');
+		}
+		
+		$http({
+			url: '../server/update.php',
+			data: data,
+			method: 'POST',
+			dataType: "json",
+			headers: {'Content-Type': 'application/json'}
+		}).then(function(data){
+			
+			if(data.status == 200) {
+				alert("success");
+				$location.path('/homePage/login');
+			} else {
+				alert("Not success");
+			}
+		})
+	
 	}
 	
-})
+}])
 /**
  * 
  */
-travelAssistant.controller("LoginUserController", function($scope, $rootScope, $http, userService){
-	var data =  {name: 'mmm', password: 'mmm'};
+travelAssistant.controller("HomePageController",
+		['$scope', 'userService', '$http',
+		 function HomePageController($scope, userService, $http){
+			
+			
+		}])
+
+travelAssistant.controller("LoginUserController", 
+		['$scope', 'userService', '$http', '$location', '$sessionStorage',
+		 function LoginUserController($scope, userService, $http, $location, $sessionStorage){
+	
 	$scope.sendAjax = function() {
+		var user = $scope.user.name;
+		var pass = $scope.user.password;
+		var data = {
+				name: user,
+				password: pass
+		};
+
 		$http({
 			url: '../server/login.php',
 			data: data,
 			method: 'POST',
-			headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8;'}
-		}).then(function successCallback(response) {
-            if (response.data.success == true) {
-                /*  failCounter = 0;*/
-                  successCb(response.data.success)
-              } else {
-                  /*failCb(++failCounter);*/'data++';
-              }
-          }, function errorCallback(response) {
-            /*  failCb(++failCounter);*/"error";
-          });
+			dataType: "json",
+			headers: {'Content-Type': 'application/json'}
+		}).then(function(data){
+			console.log(data);
+			if(data.status == 200) {
+				alert("success");
+				$sessionStorage.logged = 1;
+				$location.path('/homePage/contacts');
+				
+			} else {
+				alert("Not success");
+			}
+		})
+		
+		$scope.user={};
+		
 	}
-	
-})
+}])
 /**
  * 
  */
-travelAssistant.controller("SignUpUserController", function($scope, userService, $http){
+travelAssistant.controller("SignUpUserController", 
+		['$scope', 'userService', '$http', '$location',
+		 function SignUpUserController($scope, userService, $http, $location){
 	$scope.newUser = {};
-	/*var user = $("#s-username").val();
-	var pass = $("#s-password").val();
-	var email = $("#s-email").val();
-	var data = {
-			name: user,
-			password: pass,
-			email: email
-	}*/
-	var data = {name: 112, password: 'do0',email: "mdm"};
-	
-	
+
 	$scope.addUserAjax = function() {
+		
+		var user = $scope.newUser.name;
+		var pass = $scope.newUser.password;
+		var passRepeat = $scope.newUser.passRepeat;
+		var email = $scope.newUser.email;
+		if (pass === passRepeat){
+			var data = {
+					name: user,
+					password: pass,
+					email: email
+			}
+		} else {
+			console.log('error');
+		}
 		/*userService.addNewUser($scope.newUser);*/
 		
 			$http({
@@ -459,16 +584,17 @@ travelAssistant.controller("SignUpUserController", function($scope, userService,
 				data: data,
 				method: 'POST',
 				dataType: "json",
-				headers: {'Content-Type': 'application/json; charset=UTF-8;'}
+				headers: {'Content-Type': 'application/json'}
 			}).then(function(data){
-				if(data.success) {
+				
+				if(data.status == 200) {
 					alert("success");
+					$location.path('/homePage/login');
 				} else {
-					alert(data.error);
+					alert("Not success");
 				}
 			})
 		
 		$scope.newUser = {};
 	}
-	console.log('ctrl sign');
-})
+}])

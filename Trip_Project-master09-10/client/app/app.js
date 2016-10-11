@@ -1,19 +1,23 @@
 
 
-var travelAssistant = angular.module('travelAssistant',['ngRoute'
-   /*, 'ngCookies',
+var travelAssistant = angular.module('travelAssistant',['ngRoute'                                                    
+    /*, 'ngCookies' ,
     'travelAssistent.routes.insidePage', 
     'uiGmapGoogleMapApiProvider', 
     'geolocation' */])
 
-.config(/*['$locationProvider', '$routeProvider'],*/ 
+.config(['$locationProvider', '$routeProvider', 
           function($locationProvider, $routeProvider){
 	//$locationProvider.hashPrefix('!');   ???
 	
 	$routeProvider
 	.when('/homePage', {
-		templateUrl:"./app/routes/homePage/list/userList.html",
-		controller:'UserListController'
+		templateUrl:"./app/routes/homePage/home/homePage.html",
+		controller:'HomePageController'
+	})
+	.when('/homePage/contacts', {
+		templateUrl:"./app/routes/homePage/contacts/contacts.html",
+		controller:'ContactsController'
 	})
 	.when('/homePage/login', {
 		templateUrl:"./app/routes/homePage/login/login.html",
@@ -28,9 +32,18 @@ var travelAssistant = angular.module('travelAssistant',['ngRoute'
 		controller:'EditUserController'
 	})
 	.otherwise({redirectTo: '/homePage'})
-})
-.controller('PageController', function($rootScope) {
-	console.log("PageController");
+}])
+.controller('PageController', function($rootScope, $scope) {
+	$scope.log = "Log In";
+	
+
+	/*$scope.changeState = function(){
+		$scope.hidden = !$scope.hidden;
+	}
+	if (isLogged){
+		$scope.
+	}*/
+
 })
 
 /*   .config(function(uiGmapGoogleMapApiProvider) {
